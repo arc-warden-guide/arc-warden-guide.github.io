@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070f">
+  <meta name="description" content="Arc Warden — гайд по герою Dota 2: способности, актуальная мета, сборки, матчапы и советы по игре за Зета.">
+  <title>Arc Warden — гайд, мета и сборки | Zet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Фоновые эффекты -->
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-3" aria-hidden="true"></div>
+  <canvas id="particles" class="particles" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Верхняя навигация -->
+  <header class="topbar">
+    <a class="brand" href="#overview" data-goto="overview">
+      <span class="brand-mark">
+        <img src="images/hero_icon.png" alt="" width="32" height="32">
+      </span>
+      <span class="brand-text">
+        <strong>ARC WARDEN</strong>
+        <small>ZET · UNIVERSAL</small>
+      </span>
+    </a>
+
+    <nav class="tabs" role="tablist" aria-label="Разделы сайта">
+      <button class="tab active" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" data-tab="overview">Обзор</button>
+      <button class="tab" id="tab-abilities" role="tab" aria-selected="false" aria-controls="panel-abilities" data-tab="abilities" tabindex="-1">Способности</button>
+      <button class="tab" id="tab-meta" role="tab" aria-selected="false" aria-controls="panel-meta" data-tab="meta" tabindex="-1">Мета</button>
+      <button class="tab" id="tab-matchups" role="tab" aria-selected="false" aria-controls="panel-matchups" data-tab="matchups" tabindex="-1">Матчапы</button>
+      <button class="tab" id="tab-guide" role="tab" aria-selected="false" aria-controls="panel-guide" data-tab="guide" tabindex="-1">Гайд</button>
+    </nav>
+
+    <div class="topbar-meta" aria-label="Статистика героя">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span class="wr-pill"><b>51.2%</b> WR</span>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ================= ОБЗОР ================= -->
+    <section class="tab-panel active" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-panel="overview">
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="pulse-dot"></span>Герой · Универсальный · Дальний бой</span>
+          <h1>Arc <span class="grad-text">Warden</span></h1>
+          <p class="hero-lead">Твоя армия — это ты сам. Один герой, два тела и бесконечное давление по карте.</p>
+          <p class="hero-lore">
+            До начала всего существовал первичный разум. Его осколки стали Радиантом и Дайром,
+            а третий — Зет — заточил их в лунную тюрьму. Когда луна раскололась, Зет распался
+            на множество частей. Теперь он собирает себя заново, чтобы закончить войну —
+            любой ценой.
+          </p>
+
+          <div class="role-row">
+            <span class="chip chip-carry">Carry</span>
+            <span class="chip chip-escape">Escape</span>
+            <span class="chip chip-nuker">Nuker</span>
+            <span class="chip chip-ghost">Сложность 3/3</span>
+          </div>
+
+          <div class="cta-row">
+            <button class="btn btn-primary" type="button" data-goto="abilities">Способности <span aria-hidden="true">→</span></button>
+            <button class="btn btn-ghost" type="button" data-goto="meta">Мета и сборки</button>
+          </div>
+
+          <div class="quick-stats">
+            <div class="quick-stat">
+              <strong>51.2%</strong>
+              <span>Win rate</span>
+            </div>
+            <div class="quick-stat">
+              <strong>5.4%</strong>
+              <span>Pick rate</span>
+            </div>
+            <div class="quick-stat">
+              <strong>625</strong>
+              <span>Дальность атаки</span>
+            </div>
+            <div class="quick-stat">
+              <strong>300</strong>
+              <span>Скорость</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" id="heroVisual">
+          <div class="holo-card">
+            <div class="holo-media">
+              <video
+                class="holo-video"
+                id="heroVideo"
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="images/hero_portrait.png"
+                aria-label="Арт Arc Warden"
+              >
+                <source src="arc.mp4" type="video/mp4">
+              </video>
+              <div class="holo-tint" aria-hidden="true"></div>
+              <div class="holo-scan" aria-hidden="true"></div>
+              <img class="holo-rune" src="images/rune.webp" alt="" aria-hidden="true">
+              <span class="holo-badge">TEMPEST DOUBLE</span>
+              <span class="holo-corner holo-corner-tl" aria-hidden="true"></span>
+              <span class="holo-corner holo-corner-tr" aria-hidden="true"></span>
+              <span class="holo-corner holo-corner-bl" aria-hidden="true"></span>
+              <span class="holo-corner holo-corner-br" aria-hidden="true"></span>
+            </div>
+            <div class="holo-foot">
+              <div>
+                <span class="eyebrow">ZET</span>
+                <strong>Arc Warden</strong>
+              </div>
+              <span class="holo-live"><span class="pulse-dot"></span>LIVE</span>
+            </div>
+          </div>
+
+          <div class="floating-stat floating-stat-1">
+            <span>Win rate</span>
+            <strong>51.2%</strong>
+          </div>
+          <div class="floating-stat floating-stat-2">
+            <span>Тел в игре</span>
+            <strong>×2</strong>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sr-only">Ключевые характеристики Arc Warden</h2>
+      <div class="overview-grid">
+        <article class="card attributes-card">
+          <div class="card-head">
+            <span class="eyebrow">Базовые характеристики</span>
+            <h3>Универсальный герой</h3>
+          </div>
+          <div class="attr-list">
+            <div class="attr">
+              <span class="attr-name attr-str">STR</span>
+              <span class="attr-value"><b>20</b><small>+2.2</small></span>
+              <span class="meter"><i style="--v:67%"></i></span>
+            </div>
+            <div class="attr">
+              <span class="attr-name attr-agi">AGI</span>
+              <span class="attr-value"><b>22</b><small>+2.7</small></span>
+              <span class="meter"><i style="--v:73%"></i></span>
+            </div>
+            <div class="attr">
+              <span class="attr-name attr-int">INT</span>
+              <span class="attr-value"><b>24</b><small>+2.6</small></span>
+              <span class="meter"><i style="--v:80%"></i></span>
+            </div>
+          </div>
+          <div class="mini-stats">
+            <div><span>Урон</span><b>23–29</b></div>
+            <div><span>Броня</span><b>0</b></div>
+            <div><span>Скорость</span><b>300</b></div>
+            <div><span>Дальность</span><b>625</b></div>
+            <div><span>Обзор днём</span><b>1800</b></div>
+            <div><span>Обзор ночью</span><b>800</b></div>
+          </div>
+        </article>
+
+        <article class="card pros-card">
+          <div class="card-head">
+            <span class="eyebrow">Сильные стороны</span>
+            <h3>Почему Зет опасен</h3>
+          </div>
+          <ul class="check-list">
+            <li>Огромный потенциал фарма и сплитпуша.</li>
+            <li>Tempest Double копирует предметы и заклинания.</li>
+            <li>Magnetic Field усиливает команду и защищает строения.</li>
+            <li>Сильный лейт и контроль карты через два тела.</li>
+            <li>Гибкие сборки под любой стиль игры.</li>
+          </ul>
+        </article>
+
+        <article class="card cons-card">
+          <div class="card-head">
+            <span class="eyebrow">Слабые стороны</span>
+            <h3>Где Зет ломается</h3>
+          </div>
+          <ul class="cross-list">
+            <li>Слабый ранний гейм и зависимость от предметов.</li>
+            <li>Уязвим к прыжкам, сайленсам и бурсту.</li>
+            <li>Требует микро и управления двумя телами.</li>
+            <li>Долгий кулдаун ультимейта.</li>
+            <li>Flux не работает, если враг не один.</li>
+          </ul>
+        </article>
+
+        <article class="card identity-card">
+          <div class="card-head">
+            <span class="eyebrow">Профиль</span>
+            <h3>Как играется герой</h3>
+          </div>
+          <div class="identity-grid">
+            <div class="identity-item">
+              <span>Позиция</span>
+              <b>1 · Carry</b>
+            </div>
+            <div class="identity-item">
+              <span>Темп</span>
+              <b>Лейт</b>
+            </div>
+            <div class="identity-item">
+              <span>Урон</span>
+              <b>Физ. + маг.</b>
+            </div>
+            <div class="identity-item">
+              <span>Стиль</span>
+              <b>Фарм → сплитпуш</b>
+            </div>
+          </div>
+          <p class="identity-note">
+            Играй от безопасного фарма, забирай руны и создавай давление двойником.
+            Arc Warden не любит ранние драки без ультимейта.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= СПОСОБНОСТИ ================= -->
+    <section class="tab-panel" id="panel-abilities" role="tabpanel" aria-labelledby="tab-abilities" data-panel="abilities" hidden>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Арсенал</span>
+          <h2>Способности</h2>
+          <p>Пять инструментов Зета: от кайта и фарма до второго тела с полным набором предметов.</p>
+        </div>
+        <span class="section-badge">4 активные + 1 врождённая</span>
+      </div>
+
+      <div class="ability-grid">
+        <button class="ability-card" type="button" data-ability="flux">
+          <span class="ability-icon-wrap">
+            <img src="images/ability_flux.png" alt="" width="128" height="128" loading="lazy">
+            <span class="ability-key">Q</span>
+          </span>
+          <span class="ability-body">
+            <span class="ability-top"><strong>Flux</strong><span class="ability-type">Кайт</span></span>
+            <span class="ability-desc">Замедляет одинокую цель и наносит урон со временем. Не работает, если рядом есть другой враг.</span>
+            <span class="ability-meta"><span>16 сек КД</span><span>75 маны</span><span>625–850 каст</span></span>
+            <span class="ability-link">Смотреть каст <span aria-hidden="true">→</span></span>
+          </span>
+        </button>
+
+        <button class="ability-card" type="button" data-ability="magnetic">
+          <span class="ability-icon-wrap">
+            <img src="images/ability_magnetic.png" alt="" width="128" height="128" loading="lazy">
+            <span class="ability-key">W</span>
+          </span>
+          <span class="ability-body">
+            <span class="ability-top"><strong>Magnetic Field</strong><span class="ability-type">Бафф</span></span>
+            <span class="ability-desc">Круг силы: союзники получают скорость атаки и уклонение от атак снаружи поля.</span>
+            <span class="ability-meta"><span>20–17 сек КД</span><span>60–90 маны</span><span>900 каст</span></span>
+            <span class="ability-link">Смотреть каст <span aria-hidden="true">→</span></span>
+          </span>
+        </button>
+
+        <button class="ability-card" type="button" data-ability="spark">
+          <span class="ability-icon-wrap">
+            <img src="images/ability_spark.png" alt="" width="128" height="128" loading="lazy">
+            <span class="ability-key">E</span>
+          </span>
+          <span class="ability-body">
+            <span class="ability-top"><strong>Spark Wraith</strong><span class="ability-type">Магия</span></span>
+            <span class="ability-desc">Дух патрулирует зону и врезается в первого врага, нанося магический урон и замедляя.</span>
+            <span class="ability-meta"><span>4 сек КД</span><span>80 маны</span><span>2000 каст</span></span>
+            <span class="ability-link">Смотреть каст <span aria-hidden="true">→</span></span>
+          </span>
+        </button>
+
+        <button class="ability-card" type="button" data-ability="tempest">
+          <span class="ability-icon-wrap">
+            <img src="images/ability_tempest.png" alt="" width="128" height="128" loading="lazy">
+            <span class="ability-key">R</span>
+          </span>
+          <span class="ability-body">
+            <span class="ability-top"><strong>Tempest Double</strong><span class="ability-type">Ультимейт</span></span>
+            <span class="ability-desc">Создаёт идеальную копию Зета со всеми предметами и заклинаниями. У копии свои кулдауны.</span>
+            <span class="ability-meta"><span>60–50 сек КД</span><span>0 маны</span><span>700 каст</span></span>
+            <span class="ability-link">Смотреть каст <span aria-hidden="true">→</span></span>
+          </span>
+        </button>
+      </div>
+
+      <button class="innate-card" type="button" data-ability="runic">
+        <span class="innate-icon">
+          <img src="images/rune.webp" alt="" aria-hidden="true">
+          <span class="innate-tag">Innate</span>
+        </span>
+        <span class="innate-body">
+          <span class="ability-top"><strong>Runic Infusion</strong><span class="ability-type">Врождённая</span></span>
+          <span class="ability-desc">Каждая Power Rune, активированная Arc Warden или его двойником, навсегда даёт герою дополнительные атрибуты.</span>
+        </span>
+        <span class="innate-cta">Подробнее <span aria-hidden="true">→</span></span>
+      </button>
+
+      <div class="ability-note">
+        <span class="note-icon" aria-hidden="true">i</span>
+        <p>Нажми на способность, чтобы открыть полное описание, цифры и видео каста. Данные способностей — из официального фида Dota 2.</p>
+      </div>
+    </section>
+
+    <!-- ================= МЕТА ================= -->
+    <section class="tab-panel" id="panel-meta" role="tabpanel" aria-labelledby="tab-meta" data-panel="meta" hidden>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Снапшот · 21.11.2026</span>
+          <h2>Мета Arc Warden</h2>
+          <p>Публичные матчи, все регионы. Источник: OpenDota. Цифры обновляются вместе с мета-снапшотом.</p>
+        </div>
+        <span class="section-badge badge-live"><span class="live-dot" aria-hidden="true"></span>LIVE DATA</span>
+      </div>
+
+      <div class="meta-stats">
+        <article class="meta-stat">
+          <span class="eyebrow">Win rate</span>
+          <strong>51.16%</strong>
+          <span class="meta-trend up">+1.2 п.п. к 50%</span>
+          <span class="meter"><i style="--v:51.16%"></i></span>
+        </article>
+        <article class="meta-stat">
+          <span class="eyebrow">Pick rate</span>
+          <strong>5.38%</strong>
+          <span class="meta-trend">205 230 пиков</span>
+          <span class="meter"><i style="--v:53.8%"></i></span>
+        </article>
+        <article class="meta-stat">
+          <span class="eyebrow">Лучший брекет</span>
+          <strong>51.9%</strong>
+          <span class="meta-trend up">Legend / Ancient</span>
+          <span class="meter"><i style="--v:51.9%"></i></span>
+        </article>
+        <article class="meta-stat">
+          <span class="eyebrow">Основная роль</span>
+          <strong>Pos 1</strong>
+          <span class="meta-trend">Carry · лейт</span>
+          <span class="meter"><i style="--v:72%"></i></span>
+        </article>
+      </div>
+
+      <div class="meta-layout">
+        <article class="card bracket-card">
+          <div class="card-head">
+            <span class="eyebrow">Винрейт по рангам</span>
+            <h3>Чем выше ранг — тем стабильнее</h3>
+          </div>
+          <div class="bracket-chart">
+            <div class="bracket-row">
+              <span>Herald</span>
+              <span class="bracket-bar"><i style="--v:33.3%"></i></span>
+              <b>49.0%</b>
+            </div>
+            <div class="bracket-row">
+              <span>Guardian</span>
+              <span class="bracket-bar"><i style="--v:56.7%"></i></span>
+              <b>50.4%</b>
+            </div>
+            <div class="bracket-row">
+              <span>Crusader</span>
+              <span class="bracket-bar"><i style="--v:73.3%"></i></span>
+              <b>51.4%</b>
+            </div>
+            <div class="bracket-row">
+              <span>Archon</span>
+              <span class="bracket-bar"><i style="--v:78.3%"></i></span>
+              <b>51.7%</b>
+            </div>
+            <div class="bracket-row is-best">
+              <span>Legend</span>
+              <span class="bracket-bar"><i style="--v:81.7%"></i></span>
+              <b>51.9%</b>
+            </div>
+            <div class="bracket-row is-best">
+              <span>Ancient</span>
+              <span class="bracket-bar"><i style="--v:81.7%"></i></span>
+              <b>51.9%</b>
+            </div>
+            <div class="bracket-row">
+              <span>Divine</span>
+              <span class="bracket-bar"><i style="--v:71.7%"></i></span>
+              <b>51.3%</b>
+            </div>
+          </div>
+          <p class="card-footnote">Шкала начинается с 47%, чтобы разница между рангами была заметнее. Лучший результат — Legend и Ancient.</p>
+          <div class="bracket-summary">
+            <div>
+              <span>Общий WR</span>
+              <b>51.1%</b>
+            </div>
+            <div>
+              <span>Herald → Ancient</span>
+              <b>+2.9 п.п.</b>
+            </div>
+            <div>
+              <span>Вывод</span>
+              <b>Герой для опытных</b>
+            </div>
+          </div>
+        </article>
+
+        <article class="card position-card">
+          <div class="card-head">
+            <span class="eyebrow">Позиция и стиль</span>
+            <h3>Как играют на Зете</h3>
+          </div>
+          <div class="position-list">
+            <div class="position-item">
+              <span class="position-rank">1</span>
+              <div>
+                <b>Carry</b>
+                <p>Основная роль. Безопасный фарм, Midas, быстрый выход в лейт.</p>
+              </div>
+              <span class="position-tag main">Основная</span>
+            </div>
+            <div class="position-item">
+              <span class="position-rank">2</span>
+              <div>
+                <b>Mid</b>
+                <p>Ситуативно. Хорош против медленных мидеров, но уязвим к раннему давлению.</p>
+              </div>
+              <span class="position-tag">Альтернатива</span>
+            </div>
+            <div class="position-item">
+              <span class="position-rank">3</span>
+              <div>
+                <b>Offlane</b>
+                <p>Не рекомендуется: нужен фарм и защита, а не инициация.</p>
+              </div>
+              <span class="position-tag bad">Редко</span>
+            </div>
+          </div>
+          <div class="position-note">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <p>Пикай, если у врага мало прыжков и сайленсов, а твоя команда может дать тебе время на фарм.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="meta-layout meta-layout-2">
+        <article class="card skill-card">
+          <div class="card-head">
+            <span class="eyebrow">Прокачка</span>
+            <h3>Порядок способностей</h3>
+          </div>
+          <div class="skill-grid" aria-label="Порядок прокачки по уровням">
+            <div class="skill-cell skill-q"><span>1</span><b>Q</b></div>
+            <div class="skill-cell skill-w"><span>2</span><b>W</b></div>
+            <div class="skill-cell skill-q"><span>3</span><b>Q</b></div>
+            <div class="skill-cell skill-e"><span>4</span><b>E</b></div>
+            <div class="skill-cell skill-q"><span>5</span><b>Q</b></div>
+            <div class="skill-cell skill-r"><span>6</span><b>R</b></div>
+            <div class="skill-cell skill-q"><span>7</span><b>Q</b></div>
+            <div class="skill-cell skill-e"><span>8</span><b>E</b></div>
+            <div class="skill-cell skill-e"><span>9</span><b>E</b></div>
+            <div class="skill-cell skill-e"><span>10</span><b>E</b></div>
+            <div class="skill-cell skill-w"><span>11</span><b>W</b></div>
+            <div class="skill-cell skill-r"><span>12</span><b>R</b></div>
+            <div class="skill-cell skill-w"><span>13</span><b>W</b></div>
+            <div class="skill-cell skill-w"><span>14</span><b>W</b></div>
+            <div class="skill-cell skill-stat"><span>15</span><b>+</b></div>
+            <div class="skill-cell skill-stat"><span>16</span><b>+</b></div>
+            <div class="skill-cell skill-stat"><span>17</span><b>+</b></div>
+            <div class="skill-cell skill-r"><span>18</span><b>R</b></div>
+          </div>
+          <div class="skill-legend">
+            <span><i class="legend-dot dot-q"></i>Q — Flux</span>
+            <span><i class="legend-dot dot-w"></i>W — Magnetic Field</span>
+            <span><i class="legend-dot dot-e"></i>E — Spark Wraith</span>
+            <span><i class="legend-dot dot-r"></i>R — Tempest Double</span>
+          </div>
+          <p class="card-footnote">Базовый порядок: Q → W → Q → E → Q → R. Если нужно быстрее фармить — качай E раньше; если давят — бери W на 2–3 уровне.</p>
+
+          <div class="talent-block">
+            <span class="eyebrow">Таланты</span>
+            <div class="talent-row">
+              <span class="talent-level">10</span>
+              <span class="talent-choice is-pick">+200 Health</span>
+              <span class="talent-choice">+Flux Cast Range</span>
+            </div>
+            <div class="talent-row">
+              <span class="talent-level">15</span>
+              <span class="talent-choice is-pick">+Magnetic Field Attack Speed</span>
+              <span class="talent-choice">+% Flux Slow</span>
+            </div>
+            <div class="talent-row">
+              <span class="talent-level">20</span>
+              <span class="talent-choice is-pick">+All Attributes</span>
+              <span class="talent-choice">+Spark Wraith Duration</span>
+            </div>
+            <div class="talent-row">
+              <span class="talent-level">25</span>
+              <span class="talent-choice is-pick">+Spark Wraith Damage</span>
+              <span class="talent-choice">-Magnetic Field Cooldown</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card verdict-card">
+          <div class="card-head">
+            <span class="eyebrow">Вердикт</span>
+            <h3>Сильный лейт-керри с высоким потолком</h3>
+          </div>
+          <p>
+            Arc Warden держит 51.2% винрейта и лучше всего раскрывается в Legend–Ancient.
+            Это герой не про ранние драки, а про темп: Midas, фарм, руны, сплитпуш и
+            давление двойником. Если дать Зету 25–30 минут спокойной игры, он начинает
+            забирать карту двумя телами.
+          </p>
+          <div class="verdict-tags">
+            <span class="tag tag-good">Сильный лейт</span>
+            <span class="tag tag-good">Сплитпуш</span>
+            <span class="tag tag-good">Высокий потолок</span>
+            <span class="tag tag-warn">Слабый ранний гейм</span>
+            <span class="tag tag-bad">Уязвим к бурсту</span>
+          </div>
+          <div class="verdict-split">
+            <div class="verdict-col">
+              <span class="verdict-label good">Когда пикать</span>
+              <ul>
+                <li>У врага медленные милишные коры.</li>
+                <li>Мало прыжков и глобальных сайленсов.</li>
+                <li>Команда может играть 4+1 и дать тебе фарм.</li>
+              </ul>
+            </div>
+            <div class="verdict-col">
+              <span class="verdict-label bad">Когда не пикать</span>
+              <ul>
+                <li>Storm Spirit, Anti-Mage, Clockwerk, Silencer.</li>
+                <li>Сильное раннее давление и постоянные ганги.</li>
+                <li>Нет времени на Midas и лейт-тайминг.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="builds-block">
+        <div class="section-head section-head-small">
+          <div>
+            <span class="eyebrow">Предметы</span>
+            <h2>Сборка</h2>
+            <p>Базовая дорога: Midas → Mjollnir → Manta → BKB → ситуативные предметы.</p>
+          </div>
+        </div>
+
+        <div class="build-stage">
+          <div class="stage-head"><span class="stage-dot"></span><h4>Старт</h4><span>0–5 мин</span></div>
+          <div class="item-row">
+            <div class="item" title="Реген и выживание на линии"><img src="images/items/tango.png" alt="Tango" loading="lazy"><span>Tango</span></div>
+            <div class="item" title="Дешёвые атрибуты и дерево для Wand"><img src="images/items/branches.png" alt="Iron Branch" loading="lazy"><span>Iron Branch</span></div>
+            <div class="item" title="Атрибуты на линию"><img src="images/items/circlet.png" alt="Circlet" loading="lazy"><span>Circlet</span></div>
+            <div class="item" title="Экстренный хил"><img src="images/items/faerie_fire.png" alt="Faerie Fire" loading="lazy"><span>Faerie Fire</span></div>
+            <div class="item" title="Мана и реген"><img src="images/items/enchanted_mango.png" alt="Enchanted Mango" loading="lazy"><span>Mango</span></div>
+          </div>
+        </div>
+
+        <div class="build-stage">
+          <div class="stage-head"><span class="stage-dot"></span><h4>Ранняя игра</h4><span>5–15 мин</span></div>
+          <div class="item-row">
+            <div class="item" title="Дешёвые атрибуты и урон"><img src="images/items/wraith_band.png" alt="Wraith Band" loading="lazy"><span>Wraith Band</span></div>
+            <div class="item" title="Атакспид и атрибуты"><img src="images/items/power_treads.png" alt="Power Treads" loading="lazy"><span>Power Treads</span></div>
+            <div class="item" title="Бурст-хил и мана"><img src="images/items/magic_wand.png" alt="Magic Wand" loading="lazy"><span>Magic Wand</span></div>
+            <div class="item" title="Ускоряет фарм и опыт; двойник тоже жмёт Midas"><img src="images/items/hand_of_midas.png" alt="Hand of Midas" loading="lazy"><span>Hand of Midas</span></div>
+            <div class="item" title="Мана, хп и урон для линии"><img src="images/items/falcon_blade.png" alt="Falcon Blade" loading="lazy"><span>Falcon Blade</span></div>
+          </div>
+        </div>
+
+        <div class="build-stage">
+          <div class="stage-head"><span class="stage-dot"></span><h4>Кор</h4><span>15–30 мин</span></div>
+          <div class="item-row">
+            <div class="item" title="Цепная молния для фарма и драк"><img src="images/items/maelstrom.png" alt="Maelstrom" loading="lazy"><span>Maelstrom</span></div>
+            <div class="item" title="Апгрейд Maelstrom: урон и активка"><img src="images/items/mjollnir.png" alt="Mjollnir" loading="lazy"><span>Mjollnir</span></div>
+            <div class="item" title="Диспелл и иллюзии; копия тоже получает эффект"><img src="images/items/manta.png" alt="Manta Style" loading="lazy"><span>Manta Style</span></div>
+            <div class="item" title="Дистанция и выживаемость"><img src="images/items/dragon_lance.png" alt="Dragon Lance" loading="lazy"><span>Dragon Lance</span></div>
+            <div class="item" title="Против сайленсов и магии"><img src="images/items/black_king_bar.png" alt="Black King Bar" loading="lazy"><span>Black King Bar</span></div>
+            <div class="item" title="Мобильность по карте и сплитпуш"><img src="images/items/travel_boots.png" alt="Boots of Travel" loading="lazy"><span>Boots of Travel</span></div>
+          </div>
+        </div>
+
+        <div class="build-stage">
+          <div class="stage-head"><span class="stage-dot"></span><h4>Лейт и ситуатив</h4><span>30+ мин</span></div>
+          <div class="item-row">
+            <div class="item" title="Разрыв дистанции и выживаемость"><img src="images/items/hurricane_pike.png" alt="Hurricane Pike" loading="lazy"><span>Hurricane Pike</span></div>
+            <div class="item" title="Сайленс и криты против одиночной цели"><img src="images/items/bloodthorn.png" alt="Bloodthorn" loading="lazy"><span>Bloodthorn</span></div>
+            <div class="item" title="Уклонение и атакспид против физического урона"><img src="images/items/butterfly.png" alt="Butterfly" loading="lazy"><span>Butterfly</span></div>
+            <div class="item" title="Лайфстил и выживание в лейте"><img src="images/items/satanic.png" alt="Satanic" loading="lazy"><span>Satanic</span></div>
+            <div class="item" title="Замедление, хп и мана"><img src="images/items/skadi.png" alt="Eye of Skadi" loading="lazy"><span>Eye of Skadi</span></div>
+            <div class="item" title="Хекс для ловли мобильных целей"><img src="images/items/sheepstick.png" alt="Scythe of Vyse" loading="lazy"><span>Scythe of Vyse</span></div>
+            <div class="item" title="Постоянный бонус к скорости атаки"><img src="images/items/moon_shard.png" alt="Moon Shard" loading="lazy"><span>Moon Shard</span></div>
+            <div class="item" title="Двойник получает бонусы Arcane, Invisibility и Haste рун"><img src="images/items/aghanims_shard.png" alt="Aghanim's Shard" loading="lazy"><span>Aghanim's Shard</span></div>
+            <div class="item" title="Flux начинает сайленсить одиночную цель"><img src="images/items/aghanims_scepter.png" alt="Aghanim's Scepter" loading="lazy"><span>Aghanim's Scepter</span></div>
+          </div>
+        </div>
+
+        <div class="why-grid">
+          <article class="why-card">
+            <span class="why-num">01</span>
+            <b>Midas ×2</b>
+            <p>Двойник тоже использует Hand of Midas — это удваивает отдачу от предмета.</p>
+          </article>
+          <article class="why-card">
+            <span class="why-num">02</span>
+            <b>Поле решает драки</b>
+            <p>Magnetic Field даёт команде уклонение и скорость атаки. Ставь его на союзников и строения.</p>
+          </article>
+          <article class="why-card">
+            <span class="why-num">03</span>
+            <b>Копия предметов</b>
+            <p>Tempest Double повторяет предметы. Два Mjollnir, два Manta, два BKB — это огромный темп.</p>
+          </article>
+          <article class="why-card">
+            <span class="why-num">04</span>
+            <b>BKB обязателен</b>
+            <p>Один сайленс может выключить оба тела. BKB и дистанция — твоя страховка.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= МАТЧАПЫ ================= -->
+    <section class="tab-panel" id="panel-matchups" role="tabpanel" aria-labelledby="tab-matchups" data-panel="matchups" hidden>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Против и вместе</span>
+          <h2>Матчапы</h2>
+          <p>Кого Зет боится, кого кайтит и с кем раскрывается лучше всего.</p>
+        </div>
+        <span class="section-badge">6 / 6 / 6</span>
+      </div>
+
+      <div class="matchup-block matchup-danger">
+        <div class="matchup-head">
+          <span class="matchup-icon" aria-hidden="true">!</span>
+          <div>
+            <span class="eyebrow">Опасные соперники</span>
+            <h3>Кого боится Arc Warden</h3>
+          </div>
+        </div>
+        <div class="matchup-grid">
+          <article class="hero-match">
+            <img src="images/heroes/storm_spirit.png" alt="Storm Spirit" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Storm Spirit</strong><p>Прыгает и убивает до того, как ты поставишь поле. Держи BKB и не стой один.</p></div>
+            <span class="threat high">Высокая</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/antimage.png" alt="Anti-Mage" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Anti-Mage</strong><p>Сжигает ману и забирает темп. Сплитпушь аккуратнее и не давай себя поймать.</p></div>
+            <span class="threat high">Высокая</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/clockwerk.png" alt="Clockwerk" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Clockwerk</strong><p>Когти и батарея не дают кастовать. Нужен BKB или союзник рядом.</p></div>
+            <span class="threat high">Высокая</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/silencer.png" alt="Silencer" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Silencer</strong><p>Глобальный сайленс выключает оба тела. Играй от дистанции и покупай BKB.</p></div>
+            <span class="threat high">Высокая</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/nyx_assassin.png" alt="Nyx Assassin" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Nyx Assassin</strong><p>Мана-берн и бурст. Карапас наказывает за лишние атаки по нему.</p></div>
+            <span class="threat medium">Средняя</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/spectre.png" alt="Spectre" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Spectre</strong><p>Haunt находит двойника и основного, а в лейте перетанковывает.</p></div>
+            <span class="threat medium">Средняя</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="matchup-block matchup-success">
+        <div class="matchup-head">
+          <span class="matchup-icon" aria-hidden="true">✓</span>
+          <div>
+            <span class="eyebrow">Удобные цели</span>
+            <h3>Кого Arc Warden кайтит</h3>
+          </div>
+        </div>
+        <div class="matchup-grid">
+          <article class="hero-match">
+            <img src="images/heroes/bristleback.png" alt="Bristleback" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Bristleback</strong><p>Кайтится Flux и не достаёт до тебя. Не подходи вплотную без нужды.</p></div>
+            <span class="threat low">Удобно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/ursa.png" alt="Ursa" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Ursa</strong><p>Не догоняет. Поле, Flux и дистанция полностью решают размен.</p></div>
+            <span class="threat low">Удобно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/skeleton_king.png" alt="Wraith King" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Wraith King</strong><p>Медленный, ломается от сплитпуша и кайта. Скелеты не спасают от двух тел.</p></div>
+            <span class="threat low">Удобно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/abyssal_underlord.png" alt="Underlord" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Underlord</strong><p>Медленный и уязвимый к дальнему урону. Держи дистанцию и фарми.</p></div>
+            <span class="threat low">Удобно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/necrolyte.png" alt="Necrophos" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Necrophos</strong><p>Кайтится и не любит дальний фокус. Не давай ему стоять в куче.</p></div>
+            <span class="threat low">Удобно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/pudge.png" alt="Pudge" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Pudge</strong><p>Медленный хук-герой. Держи дистанцию, и он не сможет начать драку.</p></div>
+            <span class="threat low">Удобно</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="matchup-block matchup-synergy">
+        <div class="matchup-head">
+          <span class="matchup-icon" aria-hidden="true">+</span>
+          <div>
+            <span class="eyebrow">Синергии</span>
+            <h3>С кем играть</h3>
+          </div>
+        </div>
+        <div class="matchup-grid">
+          <article class="hero-match">
+            <img src="images/heroes/faceless_void.png" alt="Faceless Void" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Faceless Void</strong><p>Chronosphere + твой дальний урон и поле. Ты бьёшь из-за края хроно.</p></div>
+            <span class="threat synergy">Сильно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/disruptor.png" alt="Disruptor" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Disruptor</strong><p>Static Storm и Glimpse держат врагов в зоне Spark Wraith.</p></div>
+            <span class="threat synergy">Сильно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/treant.png" alt="Treant Protector" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Treant Protector</strong><p>Хил, броня и Overgrowth. Отлично защищает базу и двойника.</p></div>
+            <span class="threat synergy">Сильно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/keeper_of_the_light.png" alt="Keeper of the Light" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Keeper of the Light</strong><p>Мана и Recall. Помогает двойнику давить карту и возвращаться в бой.</p></div>
+            <span class="threat synergy">Сильно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/furion.png" alt="Nature's Prophet" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Nature's Prophet</strong><p>Двойной сплитпуш и постоянное давление по карте.</p></div>
+            <span class="threat synergy">Сильно</span>
+          </article>
+          <article class="hero-match">
+            <img src="images/heroes/crystal_maiden.png" alt="Crystal Maiden" width="32" height="32" loading="lazy">
+            <div class="hero-match-body"><strong>Crystal Maiden</strong><p>Мана-аура и контроль в ранней игре. Помогает пережить слабый старт.</p></div>
+            <span class="threat synergy">Сильно</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ГАЙД ================= -->
+    <section class="tab-panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide" data-panel="guide" hidden>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Практика</span>
+          <h2>Гайд по игре</h2>
+          <p>Комбо, тайминги и микро-советы, которые превращают два тела в одно преимущество.</p>
+        </div>
+        <span class="section-badge">Для позиции 1</span>
+      </div>
+
+      <div class="combo-grid">
+        <article class="combo-card">
+          <span class="combo-num">01</span>
+          <h3>Базовый размен</h3>
+          <p>Flux на одинокую цель → Spark Wraith за спину → автоатаки из Magnetic Field. Не подпускай врага к себе.</p>
+          <div class="combo-tags"><span>Q</span><span>E</span><span>W</span></div>
+        </article>
+        <article class="combo-card">
+          <span class="combo-num">02</span>
+          <h3>Убийство одиночки</h3>
+          <p>Flux с Aghanim's Scepter → Spark Wraith → Tempest Double → предметы на обоих → фокус. Сайленс не даёт цели уйти.</p>
+          <div class="combo-tags"><span>Q</span><span>R</span><span>items</span></div>
+        </article>
+        <article class="combo-card">
+          <span class="combo-num">03</span>
+          <h3>Сплитпуш</h3>
+          <p>Двойника — на пустую линию, основного — в лес. Midas на обоих, TP по необходимости. Давление без риска для главного тела.</p>
+          <div class="combo-tags"><span>R</span><span>TP</span><span>Midas</span></div>
+        </article>
+        <article class="combo-card">
+          <span class="combo-num">04</span>
+          <h3>Защита базы</h3>
+          <p>Magnetic Field на строение → Spark Wraith на подход → Flux на одиночную цель. Двойник чистит волны сбоку.</p>
+          <div class="combo-tags"><span>W</span><span>E</span><span>Q</span></div>
+        </article>
+      </div>
+
+      <div class="guide-layout">
+        <article class="card timeline-card">
+          <div class="card-head">
+            <span class="eyebrow">Тайминги</span>
+            <h3>План на игру</h3>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-time">0–10</span>
+              <div>
+                <b>Фарм и выживание</b>
+                <p>Midas, руны, безопасные линии. Не геройствуй без ультимейта и не стой в куче.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-time">10–20</span>
+              <div>
+                <b>Темп</b>
+                <p>Maelstrom/Mjollnir, давление двойником, фарм джунглей. Забирай руны и башни.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-time">20–35</span>
+              <div>
+                <b>Драки и карта</b>
+                <p>Manta, BKB, Dragon Lance. Создавай двойника до драки, а не в момент смерти.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-time">35+</span>
+              <div>
+                <b>Лейт</b>
+                <p>Два тела, контроль рун, сплитпуш и добивание. Не тяни с ультимейтом — двойник слабеет со временем.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card micro-card">
+          <div class="card-head">
+            <span class="eyebrow">Микро</span>
+            <h3>Советы по двум телам</h3>
+          </div>
+          <ul class="micro-list">
+            <li><b>Свои кулдауны.</b> У двойника отдельные КД предметов и способностей — используй всё на обоих.</li>
+            <li><b>Создавай заранее.</b> Tempest Double лучше жать до драки, чтобы сразу войти с полным набором.</li>
+            <li><b>Midas ×2.</b> Не забывай использовать Hand of Midas на копии — это бесплатный темп.</li>
+            <li><b>Двойник стареет.</b> Со временем он становится медленнее и менее точным — не тяни с реализацией.</li>
+            <li><b>Руны.</b> Power Rune навсегда усиливает атрибуты через Runic Infusion. С Shard двойник получает ещё и баффы рун.</li>
+            <li><b>Не стой в толпе.</b> Flux требует одиночной цели — лови отстающих и не давай врагам группироваться.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="faq-block">
+        <div class="section-head section-head-small">
+          <div>
+            <span class="eyebrow">FAQ</span>
+            <h2>Частые вопросы</h2>
+          </div>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Почему Flux не наносит урон?</summary>
+            <p>Flux работает только по одинокой цели. Если рядом с врагом есть его союзник или крипы, урон и замедление отключаются. Сначала убери окружение или лови отстающего.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Можно ли использовать Refresher Orb на двойнике?</summary>
+            <p>Нет. Tempest Double не может использовать Refresher Orb и сам Tempest Double. Все остальные предметы, которые не расходуются и не выпадают после смерти, копия использует нормально.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Что даёт Aghanim's Shard?</summary>
+            <p>Shard усиливает Tempest Double: при создании копия получает бонусы Arcane, Invisibility и Haste рун. Это не срабатывает с Runic Infusion, но сильно повышает мобильность и темп двойника.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Что даёт Aghanim's Scepter?</summary>
+            <p>Flux начинает сайленсить цель, если она одинока, а также наносит больше урона и длится дольше. Это отличный предмет против мобильных героев, которых нужно держать на месте.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Какой фасет выбрать?</summary>
+            <p>Выбирай под стиль игры: если планируешь активно контролировать руны и играть от Runic Infusion — бери соответствующее усиление; если хочешь сильнее давить двойником — вариант с рунными баффами копии. В обоих случаях руны остаются ключевым ресурсом.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Как играть против сайленсов?</summary>
+            <p>BKB, дистанция и позиция рядом с союзниками. Не начинай драку первым, если у врага есть Silencer или сильные сайленсы. Сначала выманивай ключевые заклинания, потом заходи с двойником.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark small"><img src="images/hero_icon.png" alt="" width="32" height="32"></span>
+        <div>
+          <strong>ARC WARDEN</strong>
+          <p>Фан-проект по Dota 2. Arc Warden, Zet и все изображения принадлежат Valve.</p>
+        </div>
+      </div>
+      <div class="footer-meta">
+        <span>Мета-снапшот: 21.11.2026</span>
+        <span>Данные: <a href="https://www.opendota.com/heroes/113" target="_blank" rel="noopener noreferrer">OpenDota</a></span>
+        <span>Способности: <a href="https://www.dota2.com/hero/arc_warden" target="_blank" rel="noopener noreferrer">официальный фид Dota 2</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Затемнение под панель способности -->
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+
+  <!-- Панель способности -->
+  <aside class="ability-drawer" id="abilityDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+    <button class="drawer-close" id="drawerClose" type="button">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Закрыть</span>
+    </button>
+    <div class="drawer-scroll">
+      <div class="drawer-head">
+        <span class="drawer-icon-wrap">
+          <img id="drawerIcon" src="images/ability_flux.png" alt="" width="128" height="128">
+        </span>
+        <div>
+          <span class="eyebrow" id="drawerKey">Q · Активная</span>
+          <h2 id="drawerTitle">Flux</h2>
+          <p id="drawerSub">Кайт и добивание</p>
+        </div>
+      </div>
+
+      <p class="drawer-desc" id="drawerDesc"></p>
+      <div class="drawer-stats" id="drawerStats"></div>
+      <div class="drawer-extra" id="drawerExtra"></div>
+
+      <div class="cast-frame" id="drawerCast"></div>
+      <p class="cast-note" id="drawerCastNote">Видео каста</p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
